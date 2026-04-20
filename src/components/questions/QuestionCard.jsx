@@ -1,12 +1,14 @@
-import { useNavigate } from 'react-router-dom';
-import StatusBadge from './StatusBadge';
-import { DIFFICULTIES } from '../../constants/difficulty';
-import { useQuestions } from '../../context/QuestionContext';
+import { useNavigate } from "react-router-dom";
+import StatusBadge from "./StatusBadge";
+import { DIFFICULTIES } from "../../constants/difficulty";
+import { useQuestions } from "../../context/QuestionContext";
 
 export const QuestionCard = ({ question }) => {
   const navigate = useNavigate();
-  const { updateQuestion } = useQuestions();
-  const difficultyObj = DIFFICULTIES.find(d => d.value === question.difficulty) || DIFFICULTIES[0];
+  const { updateQuestion, deleteQuestion } = useQuestions();
+  const difficultyObj =
+    DIFFICULTIES.find((d) => d.value === question.difficulty) ||
+    DIFFICULTIES[0];
 
   const handleStatusChange = (e, newStatus) => {
     e.stopPropagation();
@@ -20,15 +22,40 @@ export const QuestionCard = ({ question }) => {
       className="animate-slide-up glass-panel rounded-2xl p-5 cursor-pointer hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] transition-all duration-300 flex flex-col group"
     >
       <div className="flex justify-between items-start mb-4">
-        <h4 className="text-base font-semibold text-gray-100 line-clamp-2 pr-2 group-hover:text-blue-400 transition-colors">{question.title}</h4>
+        <h4 className="text-base font-semibold text-gray-100 line-clamp-2 pr-2 group-hover:text-blue-400 transition-colors">
+          {question.title}
+        </h4>
         <StatusBadge status={question.status} />
       </div>
       <div className="flex flex-wrap items-center gap-2 text-xs mb-5 flex-1">
-        <span className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-md font-medium">{question.topic}</span>
-        <span className={`text-${difficultyObj.color}-400 bg-${difficultyObj.color}-500/10 border border-${difficultyObj.color}-500/20 px-2.5 py-1 rounded-md font-medium`}>{difficultyObj.label}</span>
-        {question.company && <span className="bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2.5 py-1 rounded-md font-medium">{question.company}</span>}
+        <span className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-md font-medium">
+          {question.topic}
+        </span>
+        <span
+          className={`text-${difficultyObj.color}-400 bg-${difficultyObj.color}-500/10 border border-${difficultyObj.color}-500/20 px-2.5 py-1 rounded-md font-medium`}
+        >
+          {difficultyObj.label}
+        </span>
+        {question.company && (
+          <span className="bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2.5 py-1 rounded-md font-medium">
+            {question.company}
+          </span>
+        )}
       </div>
-      <div className="flex justify-end mt-auto pt-3 border-t border-white/5">
+      
+      <div className="flex justify-between items-center mt-auto pt-3 border-t border-white/5">
+         <button
+           onClick={(e) => {
+             e.stopPropagation(); // Prevents the card from navigating when you click delete
+             if (window.confirm('Are you sure you want to delete this question?')) {
+               deleteQuestion(question.id);
+             }
+           }}
+           className="text-sm font-medium text-gray-500 hover:text-red-400 transition-colors focus:outline-none"
+         >
+           Delete
+         </button>
+
          <select
            value={question.status}
            onChange={(e) => handleStatusChange(e, e.target.value)}
