@@ -26,7 +26,7 @@ export const GoalsPage = () => {
       await addDoc(collection(db, `users/${currentUser.uid}/goals`), { ...newGoal, completed: false });
       setNewGoal({ text: '', targetCount: 10, topic: TOPICS[0], deadline: '' });
       toast.success('Goal created successfully');
-    } catch (e) { 
+    } catch { 
       toast.error('Failed to create goal'); 
     }
   };
