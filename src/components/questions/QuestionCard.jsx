@@ -16,27 +16,27 @@ export const QuestionCard = ({ question }) => {
   return (
     <div
       onClick={() => navigate(`/questions/${question.id}`)}
-      className="bg-white shadow-sm border border-gray-200 rounded-xl p-5 cursor-pointer hover:shadow-md transition-all duration-200 flex flex-col"
+      className="glass-panel rounded-2xl p-5 cursor-pointer hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] transition-all duration-300 flex flex-col group"
     >
-      <div className="flex justify-between items-start mb-3">
-        <h4 className="text-base font-semibold text-gray-900 line-clamp-2 pr-2">{question.title}</h4>
+      <div className="flex justify-between items-start mb-4">
+        <h4 className="text-base font-semibold text-gray-100 line-clamp-2 pr-2 group-hover:text-blue-400 transition-colors">{question.title}</h4>
         <StatusBadge status={question.status} />
       </div>
-      <div className="flex flex-wrap items-center gap-2 text-xs mb-4 flex-1">
-        <span className="bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md font-medium">{question.topic}</span>
-        <span className={`text-${difficultyObj.color}-700 bg-${difficultyObj.color}-50 px-2.5 py-1 rounded-md font-medium`}>{difficultyObj.label}</span>
-        {question.company && <span className="bg-purple-50 text-purple-700 px-2.5 py-1 rounded-md font-medium">{question.company}</span>}
+      <div className="flex flex-wrap items-center gap-2 text-xs mb-5 flex-1">
+        <span className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-md font-medium">{question.topic}</span>
+        <span className={`text-${difficultyObj.color}-400 bg-${difficultyObj.color}-500/10 border border-${difficultyObj.color}-500/20 px-2.5 py-1 rounded-md font-medium`}>{difficultyObj.label}</span>
+        {question.company && <span className="bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2.5 py-1 rounded-md font-medium">{question.company}</span>}
       </div>
-      <div className="flex justify-end mt-auto pt-3 border-t border-gray-100">
+      <div className="flex justify-end mt-auto pt-3 border-t border-white/5">
          <select
            value={question.status}
            onChange={(e) => handleStatusChange(e, e.target.value)}
            onClick={e => e.stopPropagation()}
-           className="text-xs border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 py-1 pl-2 pr-6 shadow-sm"
+           className="text-xs bg-white/5 border-white/10 text-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 py-1.5 pl-3 pr-8"
          >
-           <option value="not-started">Mark Not Started</option>
-           <option value="attempted">Mark Attempted</option>
-           <option value="confident">Mark Confident</option>
+           <option value="not-started" className="bg-gray-900">Not Started</option>
+           <option value="attempted" className="bg-gray-900">Attempted</option>
+           <option value="confident" className="bg-gray-900">Confident</option>
          </select>
       </div>
     </div>
