@@ -1,5 +1,6 @@
 export const Button = ({ children, variant = 'primary', size = 'md', onClick, disabled, loading, className = '', type = 'button' }) => {
-  const baseStyle = "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]";
+  // Added active:scale-[0.97] for the click animation
+  const baseStyle = "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0a0a0a] active:scale-[0.97]";
   const variants = {
     primary: "bg-blue-600 text-white hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] focus:ring-blue-500 border border-blue-500/50",
     secondary: "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white focus:ring-gray-500 border border-white/10",
@@ -15,9 +16,8 @@ export const Button = ({ children, variant = 'primary', size = 'md', onClick, di
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
-      className={`${baseStyle} ${variants[variant]} ${sizes[size]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
+      className={`${baseStyle} ${variants[variant]} ${sizes[size]} ${disabled ? 'opacity-50 cursor-not-allowed transform-none' : ''} ${className}`}
     >
-      {/* Spinner SVG remains the same */}
       {loading && (
         <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

@@ -16,7 +16,8 @@ export const QuestionCard = ({ question }) => {
   return (
     <div
       onClick={() => navigate(`/questions/${question.id}`)}
-      className="glass-panel rounded-2xl p-5 cursor-pointer hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] transition-all duration-300 flex flex-col group"
+      // Added animate-slide-up here
+      className="animate-slide-up glass-panel rounded-2xl p-5 cursor-pointer hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] transition-all duration-300 flex flex-col group"
     >
       <div className="flex justify-between items-start mb-4">
         <h4 className="text-base font-semibold text-gray-100 line-clamp-2 pr-2 group-hover:text-blue-400 transition-colors">{question.title}</h4>
@@ -34,9 +35,9 @@ export const QuestionCard = ({ question }) => {
            onClick={e => e.stopPropagation()}
            className="text-xs bg-white/5 border-white/10 text-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 py-1.5 pl-3 pr-8"
          >
-           <option value="not-started" className="bg-gray-900">Not Started</option>
-           <option value="attempted" className="bg-gray-900">Attempted</option>
-           <option value="confident" className="bg-gray-900">Confident</option>
+           <option value="not-started" className="bg-gray-900 text-white">Not Started</option>
+           <option value="attempted" className="bg-gray-900 text-white">Attempted</option>
+           <option value="confident" className="bg-gray-900 text-white">Confident</option>
          </select>
       </div>
     </div>
