@@ -33,7 +33,7 @@ export const LoginPage = () => {
                <span className="text-gray-100">Create an account</span>
             ) : (
               <>
-                Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">DSAPrep</span>
+                Welcome to <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-400">DSAPrep</span>
               </>
             )}
           </h2>
